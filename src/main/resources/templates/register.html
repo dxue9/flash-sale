@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}" ></script>
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <meta charset="utf-8" />
+    <title>Register</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" />
+    <script>
+        // $(function() {// initialize
+        //     $("#verifyCodeImg").attr("src", "/sale/verifyCodeRegister");
+        //     $("#verifyCodeImg").show();
+        // });
+        // function refreshVerifyCode(){
+        //     $("#verifyCodeImg").attr("src", "/sale/verifyCodeRegister");
+        // };
+
+        // function checkPhone(phone){
+        //     if(!(/^1[34578]\d{9}$/.test(phone))){
+        //         alert("phone number invalid");
+        //         return false;
+        //     }
+        // }
+
+        function register_go() {
+            var username =$("#username").val();
+            var inputPass = $("#password").val();
+            var passwordrepeat = $("#repassword").val();
+            // var verifyCode = $("#verifyCode").val();
+            // var check = checkPhone(username);
+            // if(!check){
+            //     alert("phone number invalid");
+            //     return ;
+            // }
+            if(inputPass==""||inputPass==null||inputPass == undefined ){
+                alert("password left blank");
+                return ;
+            }
+            if(username==""||username==null||username == undefined ){
+                alert("username left blank");
+                return ;
+            }
+            if(inputPass!=passwordrepeat){
+                alert("password don't match");
+            }
+            // if(verifyCode!=verifyCode){
+            //     alert("verify code incorrect");
+            // }
+            var salt = g_passsword_salt;
+            var str = ""+salt.charAt(0)+salt.charAt(2) + inputPass +salt.charAt(5) + salt.charAt(4);
+            var password = md5(str);
+            g_showLoading();
+            $.ajax({
+                url: "/user/register",
+                type: "POST",
+                data:{
+                    username:$("#username").val(),
+                    password: password,
+                    salt:salt,
+                    // verifyCode:verifyCode
+                },
+                success:function(data){
+                    layer.closeAll();
+                    if(data == "success"){
+                        layer.msg("Success");
+                        window.location.href="/goods/to_list";
+                    }else{
+                        layer.msg("register failed");
+                    }
+                },
+                error:function(){
+                    layer.closeAll();
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+<form name="registerForm" id="registerForm" method="post">
+    <div class="wrap login_wrap">
+        <div class="content">
+            <div class="logo"></div>
+            <div class="login_box">
+                <div class="login_form">
+                    <div class="login_title">
+                        Register
+                    </div>
+                    <form action="#" method="post">
+
+                        <div class="form_text_ipt">
+                            <input id="username" name="username" type="text" placeholder="Username" />
+                        </div>
+                        <div class="ececk_warning"><span>phone/email left blank</span></div>
+
+                        <div class="form_text_ipt">
+                            <input id="password" name="password" type="password" placeholder="Password" />
+                        </div>
+                        <div class="ececk_warning"><span>password left blank</span></div>
+
+                        <div class="form_text_ipt">
+                            <input id="repassword" name="repassword" type="password" placeholder="Repeat Password" />
+                        </div>
+                        <div class="ececk_warning"><span>password left blank</span></div>
+
+<!--                        <div class="form_text_ipt">-->
+<!--                            <img id="verifyCodeImg" width="80" height="32" src="/sale/verifyCodeRegister" type="text" onclick="refreshVerifyCode()" />-->
+<!--                        </div>-->
+
+<!--                        <div class="form_text_ipt">-->
+<!--                            <input id="verifyCode"  name="verifyCode"  type="text" placeholder="验证码"/>-->
+<!--                        </div>-->
+<!--                        <div class="ececk_warning"><span>Verified Code</span></div>-->
+
+                        <div class="form_btn">
+                            <button type="button" onclick="register_go()">Register</button>
+                        </div>
+
+                        <div class="form_reg_btn">
+                            <span>Already Have One？</span><a href="/login/to_login">Login Now</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

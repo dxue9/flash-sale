@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE HTML>
+        <html xmlns:th="http://www.thymeleaf.org">
+        <head>
+        <title>Goods Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+<body>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Sale Goods Detail</div>
+    <div class="panel-body">
+        <span th:if="${user eq null}">User has not Login<br/></span>
+    </div>
+    <table class="table" id="goodslist">
+        <tr>
+            <td>Name</td>
+            <td colspan="3" th:text="${goods.goodsName}"></td>
+        </tr>
+        <tr>
+            <td>Image</td>
+            <td colspan="3"><img th:src="@{${goods.goodsImg}}" width="200" height="200" /></td>
+        </tr>
+        <tr>
+            <td>Start Date</td>
+            <td th:text="${#dates.format(goods.startDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td id="Tip">
+                <input type="hidden" id="remainSeconds" th:value="${remainSeconds}" />
+                <span th:if="${status eq 0}">Counting Down：<span id="countDown" th:text="${remainSeconds}"></span>Second(s)</span>
+                <span th:if="${status eq 1}">Selling</span>
+                <span th:if="${status eq 2}">End</span>
+            </td>
+            <td>
+<!--                <form id="saleForm" method="post" action="/sale/do_sale">-->
+<!--                    <button class="btn btn-primary btn-block" type="submit" id="buyButton">Buy</button>-->
+<!--                    <input type="hidden" name="goodsId" th:value="${goods.id}" />-->
+<!--                </form>-->
+                <div class="row">
+                    <div class="form-inline">
+<!--                        <img id="verifyCodeImg" width="80" height="32"  style="display:none" onclick="refreshVerifyCode()"/>-->
+<!--                        <input id="verifyCode"  class="form-control" style="display:none"/>-->
+                        <button class="btn btn-primary" type="button" id="buyButton"onclick="getSalePath()">Buy</button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>Original Price</td>
+            <td colspan="3" th:text="${goods.goodsPrice}"></td>
+        </tr>
+        <tr>
+            <td>Discount Price</td>
+            <td colspan="3" th:text="${goods.salePrice}"></td>
+        </tr>
+        <tr>
+            <td>Stock Count</td>
+            <td colspan="3" th:text="${goods.stockCount}"></td>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    var goodsId = [[${goods.id}]];
+
+    function getSalePath(){
+        // console.log(goodsId);
+        g_showLoading();
+        $.ajax({
+            url:"/sale/path",
+            type:"GET",
+            data:{
+                goodsId:goodsId,
+                // verifyCode:$("#verifyCode").val()
+            },
+            success:function(data){
+                if(data != "error"){
+                    placeOrder(data);
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.msg("client request error");
+            }
+        });
+    }
+
+    function placeOrder(path){
+        $.ajax({
+            url:"/sale/"+path+"/do_sale",
+            type:"POST",
+            data:{
+                goodsId: goodsId,
+            },
+            success:function(data){
+                if(data == "success"){
+                    //window.location.href="/order_detail.htm?orderId="+data.data.id;
+                    getOrderResult();
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.msg("client request error");
+            }
+        });
+    }
+
+
+    function getOrderResult(){
+        g_showLoading();
+        $.ajax({
+            url:"/sale/result",
+            type:"GET",
+            data:{
+                goodsId:goodsId,
+            },
+            success:function(data){
+                if(data != -1){
+                    layer.confirm("Congratulation! You're all set. To check the order detail?", {btn:["Sure","Not now"]},
+                    function(){
+                        window.location.href="/order_detail.htm?orderId="+data;
+                    },
+                    function(){
+                        layer.closeAll();
+                    });
+                }else{
+                    layer.msg(data.msg);
+                }
+            },
+            error:function(){
+                layer.msg("client request error");
+            }
+        });
+    }
+
+    $(function(){
+        countDown();
+    });
+
+    function countDown(){
+        var remainSeconds = $("#remainSeconds").val();
+        var timeout;
+        if(remainSeconds > 0){
+            $("#buyButton").attr("disabled", true);
+            timeout = setTimeout(function(){
+                $("#countDown").text(remainSeconds - 1);
+                $("#remainSeconds").val(remainSeconds - 1);
+                countDown();
+            },1000);
+        }else if(remainSeconds == 0){
+            $("#buyButton").attr("disabled", false);
+            if(timeout){
+                clearTimeout(timeout);
+            }
+            $("#Tip").html("Sale Begin");
+        }else{
+            $("#buyButton").attr("disabled", true);
+            $("#Tip").html("Sale End");
+        }
+    }
+
+    // function refreshVerifyCode(){
+    //     $("#verifyCodeImg").attr("src", "/sale/verifyCode?goodsId="+$("#goodsId").val()+"&timestamp="+new Date().getTime());
+    // }
+</script>
+</html>
