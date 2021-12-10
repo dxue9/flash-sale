@@ -38,13 +38,13 @@ public class OrderService {
         orderInfo.setGoodsPrice(goods.getSalePrice());
         orderInfo.setOrderChannel(1);
         orderInfo.setStatus(0);
-        orderInfo.setUserId(Long.valueOf(user.getId()));
+        orderInfo.setUserId(user.getNickname()));
         orderDao.insert(orderInfo);
 
         SaleOrder saleOrder = new SaleOrder();
         saleOrder.setGoodsId(goods.getId());
         saleOrder.setOrderId(orderInfo.getId());
-        saleOrder.setUserId(Long.valueOf(user.getNickname()));
+        saleOrder.setUserId(user.getNickname());
         orderDao.insertSaleOrder(saleOrder);
         return orderInfo;
     }
