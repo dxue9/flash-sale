@@ -33,8 +33,8 @@ public class RegisterController {
                            @RequestParam("salt") String salt,
                            HttpServletResponse response){
         if(!saleUserService.register(response, username, password, salt)){
-            return "false";
+            return "failed";
         }
-        return "true";
+        return "success";
     }
 }
