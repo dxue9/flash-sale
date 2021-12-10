@@ -38,7 +38,7 @@ public class OrderService {
         orderInfo.setGoodsPrice(goods.getSalePrice());
         orderInfo.setOrderChannel(1);
         orderInfo.setStatus(0);
-        orderInfo.setUserId(user.getNickname()));
+        orderInfo.setUserId(user.getNickname());
         orderDao.insert(orderInfo);
 
         SaleOrder saleOrder = new SaleOrder();
