@@ -8,6 +8,7 @@
     <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
     <!-- bootstrap -->
     <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
     <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
     <!-- jquery-validator -->
     <script type="text/javascript" th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
@@ -21,45 +22,38 @@
 
 </head>
 <body>
-
+<div class="wrap login_wrap">
 <form name="loginForm" id="loginForm" method="post"  style="width:50%; margin:0 auto">
-
-    <h2 style="text-align:center; margin-bottom: 20px">User Login</h2>
+    <div class="login_box">
+    <div class="login_title">User Login</div>
 
     <div class="form-group">
         <div class="row">
-            <label class="form-label col-md-4">Please input username</label>
-            <div class="col-md-5">
-                <input id="mobile" name = "mobile" class="form-control" type="text" placeholder="username" required="true"/>
-            </div>
-            <div class="col-md-1">
+
+            <div class="form_text_ipt">
+                <input id="mobile" name = "mobile"  type="text" placeholder="Username" required="true"/>
             </div>
         </div>
     </div>
 
     <div class="form-group">
         <div class="row">
-            <label class="form-label col-md-4">Please input password</label>
-            <div class="col-md-5">
-                <input id="password" name="password" class="form-control" type="password"  placeholder="password" required="true"/>
+            <div class="form_text_ipt">
+                <input id="password" name="password"  type="password"  placeholder="Password" required="true"/>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-5">
-<!--            <button class="btn btn-primary btn-block"  onclick="register()">Register</button>-->
-            <a href="/user/do_register">Register Now</a>
+        <div class="form_btn">
+            <button  type="submit" onclick="login()">Login</button>
         </div>
-        <div class="col-md-5">
-            <button class="btn btn-primary btn-block" type="submit" onclick="login()">Login</button>
+        <div class="form_reg_btn">
+            <span>Need Register ? </span><a href="/user/do_register"> Register Now</a>
         </div>
-<!--        <div class="col-md-5">-->
-<!--            <p th:text="'Website visit count:'+${count}" ></p>-->
-<!--        </div>-->
     </div>
 
 </form>
+</div>
 </body>
 <script>
     // function register() {

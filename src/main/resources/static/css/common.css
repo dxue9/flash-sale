@@ -132,7 +132,7 @@ header{
 	margin: 5px;
 	border: none;
 	font-family: "微软雅黑";
-	font-size: 15px;
+	font-size: 20px;
 	color: #666;
 }
 .check_left label{
@@ -152,7 +152,7 @@ header{
 	height: 100%;
 	border: none;
 	color: #FFFFFF;
-	font-size: 14px;
+	font-size: 18px;
 	background: forestgreen;
 	cursor: pointer;
 	border-radius: 10px;
