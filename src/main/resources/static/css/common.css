@@ -181,4 +181,17 @@ header{
 .other_right a:hover{
 	color:#AEEEEE;
 }
+.container-table{
+	border-radius: 10px;
+	width: 1000px;
+	height: 700px;
+	background: #FFFFFF;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	padding:20px;
+}
 

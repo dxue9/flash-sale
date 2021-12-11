@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" th:href="@{/css/common.css}" />
 <head>
     <title>Goods List</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -22,15 +24,22 @@
 <body>
 
 <div class="panel panel-default">
-    <div class="panel-heading">Sale Goods Lists</div>
-<!--    <div  class="panel-heading">-->
-<!--        <button onclick="messageRegister()">Message Center</button>-->
-<!--        <input id="userid" th:value="${user.id}"></input>-->
-<!--    </div>　　-->
+    <div class="wrap login_wrap">
+    <div class="container">
+        <div class="container-table">
+            <h1 style="text-align: center;">Sale Goods Lists</h1>
     <table class="table" id="goodslist">
-        <tr><td>Name</td><td>Image</td><td>Original Price</td><td>Discount Price</td><td>Stock Count</td><td>Detail</td></tr>
-        <tr  th:each="goods,goodsStat : ${goodsList}">
-            <td th:text="${goods.goodsName}"></td>
+
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Original Price</th>
+            <th>Discount Price</th>
+            <th>Stock Count</th>
+            <th>Detail</th>
+        </tr>
+        <tr th:each="goods: ${goodsList}">
+            <th th:text="${goods.goodsName}"></th>
             <td><img th:src="@{${goods.goodsImg}}" width="100" height="100" /></td>
             <td th:text="${goods.goodsPrice}"></td>
             <td th:text="${goods.salePrice}"></td>
@@ -38,6 +47,8 @@
 　　　　　    <td><a th:href="'/goods/to_detail/' + ${goods.id}">Detail</a></td>　　
         </tr>
     </table>
+    </div>
+</div>
 </div>
 </body>
 

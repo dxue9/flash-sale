@@ -21,14 +21,19 @@
     <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
     <!-- common.js -->
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
 </head>
 <body>
 
 <div class="panel panel-default">
-    <div class="panel-heading">Sale Goods Detail</div>
+    <div class="wrap login_wrap">
     <div class="panel-body">
         <span th:if="${user eq null}">User has not Login<br/></span>
     </div>
+    <div class="container">
+        <div class="container-table">
+            <h1 style="text-align: center;">Sale Goods Lists</h1>
     <table class="table" id="goodslist">
         <tr>
             <td>Name</td>
@@ -74,6 +79,9 @@
             <td colspan="3" th:text="${goods.stockCount}"></td>
         </tr>
     </table>
+</div>
+    </div>
+</div>
 </div>
 </body>
 <script>
