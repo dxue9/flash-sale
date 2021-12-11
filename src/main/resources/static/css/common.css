@@ -182,12 +182,6 @@ header{
 .other_right a:hover{
 	color:#AEEEEE;
 }
-.card{
-	border-radius: 10px;
-	margin: 10px auto;
-	padding:20px;
-	display: flex;
-}
 .container-table{
 	border-radius: 10px;
 	background: #FFFFFF;
@@ -197,8 +191,4 @@ header{
 	right: 0;
 	bottom: 0;
 	margin: auto;
-}
-.card-img-top{
-	width: 150px;
-	height: 150px;
 }
