@@ -5,6 +5,7 @@ import com.wangzehao.flashsale.domain.OrderInfo;
 import com.wangzehao.flashsale.domain.SaleOrder;
 import com.wangzehao.flashsale.domain.SaleUser;
 import com.wangzehao.flashsale.vo.GoodsVo;
+import com.wangzehao.flashsale.vo.OrderDetailVo;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
