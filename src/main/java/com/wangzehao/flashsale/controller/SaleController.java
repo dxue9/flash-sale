@@ -1,5 +1,6 @@
 package com.wangzehao.flashsale.controller;
 
+import com.wangzehao.flashsale.access.AccessLimit;
 import com.wangzehao.flashsale.domain.OrderInfo;
 import com.wangzehao.flashsale.domain.SaleOrder;
 import com.wangzehao.flashsale.domain.SaleUser;
@@ -95,6 +96,7 @@ public class SaleController{
 //        }
 //    }
 
+    @AccessLimit(needLogin = true)
     @RequestMapping(value="/path")
     @ResponseBody
     public String getSalePath(HttpServletRequest request, SaleUser user,
@@ -105,11 +107,12 @@ public class SaleController{
         return saleService.createBuyPath(user, goodsId);
     }
 
+    @AccessLimit(needLogin = true)
     @RequestMapping(value = "/{path}/do_sale", method = RequestMethod.POST)
     @ResponseBody
     public String placeOrder(Model model, SaleUser user, @PathVariable("path") String path,
                              @RequestParam("goodsId") long goodsId){
-        if(user == null){
+        if(user == null)    {
             return "error";
         }
         // check if have existing order
@@ -135,6 +138,7 @@ public class SaleController{
      * -1：failed
      * 0： queueing
      */
+    @AccessLimit(needLogin = true)
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     @ResponseBody
     public Long saleResult(Model model, SaleUser user,@RequestParam("goodsId") long goodsId) {

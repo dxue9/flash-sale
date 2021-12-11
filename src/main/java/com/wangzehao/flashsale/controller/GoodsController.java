@@ -34,7 +34,7 @@ public class GoodsController extends BaseController{
     @RequestMapping(value = "/to_list", produces = "text/html")
     @ResponseBody
     public String list(HttpServletRequest request, HttpServletResponse response, Model model, SaleUser user){
-//        model.addAttribute("user", user);
+        model.addAttribute("user", user);
         List<GoodsVo> goodsVoList = goodsService.listGoodsVo();
         model.addAttribute("goodsList", goodsVoList);
         return render(request, response, model, "goods_list");

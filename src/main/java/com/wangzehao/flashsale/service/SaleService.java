@@ -36,12 +36,12 @@ public class SaleService {
         }
     }
 
-    public long getSaleResult(String userId, long goodsId) {
+    public Long getSaleResult(String userId, long goodsId) {
         SaleOrder order = orderService.getSaleOrderByUserIdGoodsId(userId, goodsId);
         if(order != null) {// sale success
             return order.getOrderId();
         }
-        return 0;
+        return -1l;
     }
 
     public String createBuyPath(SaleUser user, long goodsId) {
