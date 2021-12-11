@@ -22,25 +22,26 @@
 </head>
 
 <body>
-
-<div class="panel panel-default">
-            <h1 style="text-align: center;">Sale Goods Lists</h1>
-    </table>
-            <div th:each="goods: ${goodsList}">
-                <div class="card-deck" style="display: flex ;position: relative;">
-                <div class="card" style="background:#DCDCDC;width:240px;height:400px;border-radius: 10px;margin: 10px;padding:20px;">
+<div class="warp login_wrap">
+<h1 style="font-size:50px;text-align: center;margin-top: 0;padding-top: 40px;">Sale Goods Lists</h1>
+<div  style="display: flex">
+            <div th:each="goods: ${goodsList}" >
+                <div class="card-deck">
+                <div class="card" style="background: #FFFFFF;width:240px;height:400px;border-radius: 10px;margin:100px 120px;padding:20px;">
                     <img class="card-img-top" th:src="@{${goods.goodsImg}}" style="width: 200px;height: 200px;"alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title" th:text="${goods.goodsName}" style="font-size:20px;font-weight: bold;"></h5>
-                        <p class="card-text">Original Price: <span th:text="${goods.goodsPrice}" style="color: red"></span></p>
+                        <p class="card-text">Original Price: <span th:text="${goods.goodsPrice}" style="color: blue"></span></p>
                         <p class="card-text">Discount Price: <span th:text="${goods.salePrice}" style="color: red"></span></p>
                         <p class="card-text">Stock Count: <span th:text="${goods.stockCount}" style="color: red"></span></p>
                     </div>
-                        <a th:href="'/goods/to_detail/' + ${goods.id}" class="btn btn-primary" style="display: block;margin: 0 auto;">Detail</a>
+                        <a th:href="'/goods/to_detail/' + ${goods.id}" class="btn btn-success" style="display: block;margin: 0 auto;">Detail</a>
                     </div>
                 </div>
+            </div>
                 </div>
             </div>
+</div>
 </body>
 
 <!--<script>-->
