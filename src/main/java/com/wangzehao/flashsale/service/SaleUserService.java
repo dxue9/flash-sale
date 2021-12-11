@@ -120,7 +120,8 @@ public class SaleUserService {
     private void addCookie(HttpServletResponse response, String token, SaleUser user) {
         redisService.set(SaleUserKey.token, token, user);
         Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);
-        System.out.println(token);
+        cookie.setMaxAge(SaleUserKey.token.expireSeconds());
+        cookie.setPath("/");
         response.addCookie(cookie);
     }
 

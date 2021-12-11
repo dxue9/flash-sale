@@ -115,7 +115,6 @@ public class SaleController{
         if(user == null)    {
             return "error";
         }
-        System.out.println(user);
         // check if have existing order
         SaleOrder order = orderService.getSaleOrderByUserIdGoodsId(user.getNickname(), goodsId);
         if (order != null) {
