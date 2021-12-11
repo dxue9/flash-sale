@@ -93,7 +93,6 @@ header{
 
 .login_box{
 	border-radius: 10px;
-	height:400px;
 	width: 360px;
 	background: #FFFFFF;
 	position: absolute;
@@ -104,20 +103,19 @@ header{
 	margin: auto;
 }
 .login_title{
-	font-size: 25px;
+	font-size: 22px;
 	text-align: center;
 	color: forestgreen;
 	padding: 15px 0;
 	width: 300px;
 	margin: 0 auto;
-	/*border-bottom: solid 1px #CCCCCC;*/
 }
 .form_text_ipt{
 	width: 300px;
 	height: 40px;
 	border: solid 1px #CCCCCC;
 	margin: 20px auto 0 auto;
-	background: #FFFFFF;
+	background: #F0FFFF;
 	border-radius: 10px;
 }
 .form_check_ipt{
@@ -131,8 +129,8 @@ header{
 	height: 30px;
 	margin: 5px;
 	border: none;
-	font-family: "微软雅黑";
-	font-size: 20px;
+	font-family: "Times New Roman";
+	font-size: 12px;
 	color: #666;
 }
 .check_left label{
@@ -152,7 +150,7 @@ header{
 	height: 100%;
 	border: none;
 	color: #FFFFFF;
-	font-size: 18px;
+	font-size: 15px;
 	background: forestgreen;
 	cursor: pointer;
 	border-radius: 10px;
