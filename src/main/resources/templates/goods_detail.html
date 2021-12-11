@@ -32,20 +32,33 @@
         <span th:if="${user eq null}">User has not Login<br/></span>
     </div>
     <div class="container">
-        <div class="container-table">
-            <h1 style="text-align: center;">Sale Goods</h1>
-    <table class="table" id="goodslist">
+        <div class="card" style="background: #FFFFFF;border-radius: 10px;height:600px;">
+            <h1 style="text-align: center;padding-top:20px;">Sale Goods</h1>
+    <table class="table" id="goodslist" >
         <tr>
-            <td>Name</td>
-            <td colspan="3" th:text="${goods.goodsName}"></td>
+            <th style="padding-left: 50px;">Name</th>
+            <th colspan="3" th:text="${goods.goodsName}"></th>
         </tr>
         <tr>
-            <td>Image</td>
+            <th style="padding-left: 50px;">Image</th>
             <td colspan="3"><img th:src="@{${goods.goodsImg}}" width="200" height="200" /></td>
         </tr>
+
         <tr>
-            <td>Start Date</td>
-            <td th:text="${#dates.format(goods.startDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <th style="padding-left: 50px;">Original Price</th>
+            <td colspan="3" th:text="${goods.goodsPrice}" ></td>
+        </tr>
+        <tr>
+            <th style="padding-left: 50px;">Discount Price</th>
+            <td colspan="3" th:text="${goods.salePrice}" style="color: red"></td>
+        </tr>
+        <tr>
+            <th style="padding-left: 50px;">Stock Count</th>
+            <td colspan="3" th:text="${goods.stockCount}" style="color: red"></td>
+        </tr>
+        <tr>
+            <th style="padding-left: 50px;" >Start Date</th>
+            <td th:text="${#dates.format(goods.startDate, 'yyyy-MM-dd HH:mm:ss')}" style="color: red"></td>
             <td id="Tip">
                 <input type="hidden" id="remainSeconds" th:value="${remainSeconds}" />
                 <span th:if="${status eq 0}">Counting Down：<span id="countDown" th:text="${remainSeconds}"></span>Second(s)</span>
@@ -53,30 +66,18 @@
                 <span th:if="${status eq 2}">End</span>
             </td>
             <td>
-<!--                <form id="saleForm" method="post" action="/sale/do_sale">-->
-<!--                    <button class="btn btn-primary btn-block" type="submit" id="buyButton">Buy</button>-->
-<!--                    <input type="hidden" name="goodsId" th:value="${goods.id}" />-->
-<!--                </form>-->
+                <!--                <form id="saleForm" method="post" action="/sale/do_sale">-->
+                <!--                    <button class="btn btn-primary btn-block" type="submit" id="buyButton">Buy</button>-->
+                <!--                    <input type="hidden" name="goodsId" th:value="${goods.id}" />-->
+                <!--                </form>-->
                 <div class="row">
                     <div class="form-inline">
-<!--                        <img id="verifyCodeImg" width="80" height="32"  style="display:none" onclick="refreshVerifyCode()"/>-->
-<!--                        <input id="verifyCode"  class="form-control" style="display:none"/>-->
+                        <!--                        <img id="verifyCodeImg" width="80" height="32"  style="display:none" onclick="refreshVerifyCode()"/>-->
+                        <!--                        <input id="verifyCode"  class="form-control" style="display:none"/>-->
                         <button class="btn btn-primary" type="button" id="buyButton"onclick="getSalePath()">Buy</button>
                     </div>
                 </div>
             </td>
-        </tr>
-        <tr>
-            <td>Original Price</td>
-            <td colspan="3" th:text="${goods.goodsPrice}"></td>
-        </tr>
-        <tr>
-            <td>Discount Price</td>
-            <td colspan="3" th:text="${goods.salePrice}"></td>
-        </tr>
-        <tr>
-            <td>Stock Count</td>
-            <td colspan="3" th:text="${goods.stockCount}"></td>
         </tr>
     </table>
 </div>
