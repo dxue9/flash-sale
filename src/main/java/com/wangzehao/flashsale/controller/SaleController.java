@@ -4,6 +4,8 @@ import com.wangzehao.flashsale.access.AccessLimit;
 import com.wangzehao.flashsale.domain.OrderInfo;
 import com.wangzehao.flashsale.domain.SaleOrder;
 import com.wangzehao.flashsale.domain.SaleUser;
+import com.wangzehao.flashsale.redis.RedisService;
+import com.wangzehao.flashsale.redis.prefix.GoodsKey;
 import com.wangzehao.flashsale.service.GoodsService;
 import com.wangzehao.flashsale.service.OrderService;
 import com.wangzehao.flashsale.service.SaleService;
@@ -29,7 +31,7 @@ import java.util.List;
 public class SaleController{
 
     @Autowired
-    private SaleUserService saleUserService;
+    private RedisService redisService;
 
     @Autowired
     private GoodsService goodsService;
@@ -104,6 +106,10 @@ public class SaleController{
         if(user == null){
             return "error";
         }
+
+        Integer orginalStock = goodsService.getStockByGoodsId(goodsId);
+        redisService.set(GoodsKey.getGoodsStock, user.getNickname(), orginalStock);
+
         return saleService.createBuyPath(user, goodsId);
     }
 
@@ -147,6 +153,9 @@ public class SaleController{
         }
         model.addAttribute("user", user);
         Long saleResult = saleService.getSaleResult(user.getNickname(), goodsId);
+        Integer currentStock = goodsService.getStockByGoodsId(goodsId);
+        Integer originalStock = redisService.get(GoodsKey.getGoodsStock, user.getNickname(), Integer.class);
+
         return saleResult;
     }
 }

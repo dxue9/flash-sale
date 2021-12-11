@@ -23,6 +23,8 @@ public class GoodsService {
         return goodsDao.getGoodsVoByGoodsId(goodsId);
     }
 
+    public Integer getStockByGoodsId(long goodsId) {return goodsDao.getStockByGoodsId(goodsId); }
+
     public boolean reduceStock(GoodsVo goods) {
         SaleGoods saleGoods = new SaleGoods();
         saleGoods.setGoodsId(goods.getId());
