@@ -24,9 +24,6 @@
 <body>
 
 <div class="panel panel-default">
-<!--    <div class="wrap login_wrap">-->
-    <div class="container">
-<!--        <div class="container-table">-->
             <h1 style="text-align: center;">Sale Goods Lists</h1>
 <!--    <table class="table" id="goodslist">-->
 <!--        <tr>-->
@@ -47,20 +44,25 @@
 <!--        </tr>-->
 <!--    </table>-->
             <div th:each="goods: ${goodsList}">
+                <div class="card-group">
                 <div class="card" >
+                    <div class="row">
+                        <div class="col-sm-6">
                     <img class="card-img-top" th:src="@{${goods.goodsImg}}" alt="Card image cap">
                     <div class="card-body">
-                        <h5 class="card-title" th:text="${goods.goodsName}"></h5>
+                        <h5 class="card-title" th:text="${goods.goodsName}" style="font-size:20px;font-weight: bold;"></h5>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item" th:text="${goods.goodsPrice}">Original Price</li>
                             <li class="list-group-item" th:text="${goods.salePrice}">Discount Price</li>
-                            <li class="list-group-item" th:text="${goods.stockCount}"></li>
+                            <li class="list-group-item" th:text="${goods.stockCount}">Stock Count</li>
                         </ul>
                         <a th:href="'/goods/to_detail/' + ${goods.id}" class="btn btn-primary">Detail</a>
                     </div>
                 </div>
             </div>
-</div>
+            </div>
+                </div>
+            </div>
 </body>
 
 <!--<script>-->

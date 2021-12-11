@@ -184,11 +184,9 @@ header{
 }
 .card{
 	border-radius: 10px;
-	width: 400px;
-	height: 400px;
-	background: #F0FFFF;
 	margin: 10px auto;
 	padding:20px;
+	display: flex;
 }
 .container-table{
 	border-radius: 10px;
@@ -204,4 +202,3 @@ header{
 	width: 150px;
 	height: 150px;
 }
-
