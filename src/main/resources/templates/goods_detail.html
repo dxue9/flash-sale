@@ -149,12 +149,14 @@
             },
             success:function(data){
                 if(data.code == 0){
-                    layer.confirm("Congratulation! You are the No. " + (data.data[0] - data.data[1]).toString() + " to spike this goods. To check the order detail?", {btn:["Sure","Not now"]},
-                    function(){
+                    layer.confirm("Congratulation! You are the No. " + (data.data[0]-data.data[1]).toString() + " to spike this goods. To check the order detail?",
+                        {title : "Order Confirmation", btn:["Sure","Not now"]},
+                            function(){
                         window.location.href="/order_detail.htm?orderId="+data.data[2];
                     },
                     function(){
                         layer.closeAll();
+                        href="/order_detail.htm?orderId="+data.data[2];
                     });
                 }else{
                     layer.msg(data.message);
