@@ -40,6 +40,10 @@
             <th colspan="3" th:text="${goods.goodsName}"></th>
         </tr>
         <tr>
+            <th style="padding-left: 50px;">Detail</th>
+            <td colspan="3" th:text="${goods.goodsDetail}"></td>
+        </tr>
+        <tr>
             <th style="padding-left: 50px;">Image</th>
             <td colspan="3"><img th:src="@{${goods.goodsImg}}" width="200" height="200" /></td>
         </tr>
