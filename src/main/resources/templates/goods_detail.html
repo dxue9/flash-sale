@@ -84,6 +84,8 @@
             </td>
         </tr>
     </table>
+            <div style="text-align: center;font-size: 15px;">
+                <a href="/goods/to_list">Continue shopping</a></div>
 </div>
     </div>
 </div>
@@ -150,7 +152,6 @@
                     layer.confirm("Congratulation! You are the No. " + (data.data[0] - data.data[1]).toString() + " to spike this goods. To check the order detail?", {btn:["Sure","Not now"]},
                     function(){
                         window.location.href="/order_detail.htm?orderId="+data.data[2];
-                        // window.location.href="/order/to_detail;
                     },
                     function(){
                         layer.closeAll();
