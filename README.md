@@ -3,7 +3,10 @@
 # Flash Sale Distributed System
 
 A distributed system for flash sale  implemented in Java.
-
+# Fucntion
+- user login/register
+     ![](register.jpg)
+     ![](user login.jpg)
 ## DB Schema
 
 - mysql
