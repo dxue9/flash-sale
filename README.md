@@ -12,7 +12,7 @@ A distributed system for flash sale  implemented in Java.
 - flash sale page
  ![](saleGoodsDetail.jpg)
 - Order detail page
- ![](orderDetail.jpg）
+  ![](orderDetail.jpg)
 ## DB Schema
 
 - mysql
