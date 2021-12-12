@@ -4,9 +4,13 @@
 
 A distributed system for flash sale  implemented in Java.
 # Fucntion
-- user login/register
+- user login/register page
      ![](register.jpg)
      ![](userLogin.jpg)
+- sales goods page
+ ![](saleGoodsList.jpg)
+- flash sale page
+ ![](saleGoodsDetail.jpg)
 ## DB Schema
 
 - mysql
