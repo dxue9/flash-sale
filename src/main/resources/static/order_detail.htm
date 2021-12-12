@@ -1,4 +1,6 @@
 <!DOCTYPE HTML>
+
+
 <html>
 <head>
     <title>订单详情</title>
@@ -17,44 +19,46 @@
     <script type="text/javascript" src="/js/md5.min.js"></script>
     <!-- common.js -->
     <script type="text/javascript" src="/js/common.js"></script>
+    <link rel="stylesheet" th:href="@{/css/common.css}" />
 </head>
 <body>
-<div class="panel panel-default" >
-    <div class="panel-heading">Order Detail</div>
-    <table class="table" id="goodslist">
-        <tr>
-            <td>Goods Name</td>
-            <td colspan="3" id="goodsName"></td>
-        </tr>
-        <tr>
-            <td>Goods Image</td>
-            <td colspan="2"><img  id="goodsImg" width="200" height="200" /></td>
-        </tr>
-        <tr>
-            <td>Order Price</td>
-            <td colspan="2"  id="orderPrice"></td>
-        </tr>
-        <tr>
-            <td>Order Time</td>
-            <td id="createDate" colspan="2"></td>
-        </tr>
-        <tr>
-            <td>Order Status</td>
-            <td id="orderStatus">
-            </td>
-            <td>
-                <button class="btn btn-primary btn-block" type="submit" id="payButton">Pay Now</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Recipient Name</td>
-            <td colspan="2">Alice</td>
-        </tr>
-        <tr>
-            <td>Shipping Address</td>
-            <td colspan="2">Somewhere</td>
-        </tr>
-    </table>
+<div class="panel" >
+        <div class="container">
+            <div class="card" style="background: #F8F8F8;border-radius: 20px;height:550px;">
+                <h1 style="text-align: center;padding-top:20px;">Order Detail</h1>
+                <table class="table" id="goodslist">
+                    <tr>
+                        <th style="padding-left: 50px;">Goods Name</th>
+                        <th colspan="3" id="goodsName"></th>
+                    </tr>
+                    <tr>
+                        <th style="padding-left: 50px;">Goods Image</th>
+                        <td colspan="2"><img  id="goodsImg" width="200" height="200" /></td>
+                    </tr>
+                    <tr>
+                        <th style="padding-left: 50px;">Order Price</th>
+                        <td colspan="2"  id="orderPrice"></td>
+                    </tr>
+                    <tr>
+                        <th style="padding-left: 50px;">Order Time</th>
+                        <td id="createDate" colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <th style="padding-left: 50px;">Order Status</th>
+                        <td id="orderStatus"></td>
+                    </tr>
+                    <tr>
+                        <th style="padding-left: 50px;">Recipient Name</th>
+                        <td colspan="2">Alice</td>
+                    </tr>
+                    <tr>
+                        <th style="padding-left: 50px;">Shipping Address</th>
+                        <td colspan="2">6 metroCenter</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+</div>
 </div>
 </body>
 </html>
