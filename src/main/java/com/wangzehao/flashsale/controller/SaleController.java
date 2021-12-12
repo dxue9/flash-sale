@@ -1,6 +1,8 @@
 package com.wangzehao.flashsale.controller;
 
 import com.wangzehao.flashsale.access.AccessLimit;
+import com.wangzehao.flashsale.common.CustomAbstractResponse;
+import com.wangzehao.flashsale.common.CustomResponse;
 import com.wangzehao.flashsale.domain.OrderInfo;
 import com.wangzehao.flashsale.domain.SaleOrder;
 import com.wangzehao.flashsale.domain.SaleUser;
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -147,15 +150,20 @@ public class SaleController{
     @AccessLimit(needLogin = true)
     @RequestMapping(value = "/result", method = RequestMethod.GET)
     @ResponseBody
-    public Long saleResult(Model model, SaleUser user,@RequestParam("goodsId") long goodsId) {
+    public CustomAbstractResponse saleResult(Model model, SaleUser user, @RequestParam("goodsId") long goodsId) {
         if (user == null) {
-            return -1l;
+            return CustomResponse.build().withError("user is null");
         }
         model.addAttribute("user", user);
         Long saleResult = saleService.getSaleResult(user.getNickname(), goodsId);
         Integer currentStock = goodsService.getStockByGoodsId(goodsId);
         Integer originalStock = redisService.get(GoodsKey.getGoodsStock, user.getNickname(), Integer.class);
-
-        return saleResult;
+        CustomResponse<List<Long>> response = CustomResponse.build();
+        ArrayList<Long> stocks = new ArrayList<Long>();
+        stocks.add((long)originalStock);
+        stocks.add((long)currentStock);
+        stocks.add(saleResult);
+        response.setData(stocks);
+        return response;
     }
 }

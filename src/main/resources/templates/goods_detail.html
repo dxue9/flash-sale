@@ -146,10 +146,10 @@
                 goodsId:goodsId,
             },
             success:function(data){
-                if(data != -1){
-                    layer.confirm("Congratulation! You're all set. To check the order detail?", {btn:["Sure","Not now"]},
+                if(data.code == 0){
+                    layer.confirm("Congratulation! You are the No. " + data.data.get(1) - data.data.get(0) + " to XXX. To check the order detail?", {btn:["Sure","Not now"]},
                     function(){
-                        window.location.href="/order_detail.htm?orderId="+data;
+                        window.location.href="/order_detail.htm?orderId="+data.data.get(2);
                         // window.location.href="/order/to_detail;
                     },
                     function(){
