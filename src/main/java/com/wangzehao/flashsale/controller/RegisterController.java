@@ -1,5 +1,7 @@
 package com.wangzehao.flashsale.controller;
 
+import com.wangzehao.flashsale.common.CustomResponse;
+import com.wangzehao.flashsale.common.enums.CustomResponseStatus;
 import com.wangzehao.flashsale.dao.SaleUserDao;
 import com.wangzehao.flashsale.service.SaleUserService;
 import org.slf4j.Logger;
@@ -28,13 +30,14 @@ public class RegisterController {
 
     @RequestMapping("/register")
     @ResponseBody
-    public String register(@RequestParam("username") String username,
-                           @RequestParam("password") String password,
-                           @RequestParam("salt") String salt,
-                           HttpServletResponse response){
+    public CustomResponse<String> register(@RequestParam("username") String username,
+                                           @RequestParam("password") String password,
+                                           @RequestParam("salt") String salt,
+                                           HttpServletResponse response){
+        CustomResponse<String> result = CustomResponse.build();
         if(!saleUserService.register(response, username, password, salt)){
-            return "failed";
+            result.withError(CustomResponseStatus.ERROR.getCode(), CustomResponseStatus.ERROR.getMessage());
         }
-        return "success";
+        return result;
     }
 }

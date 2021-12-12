@@ -4,7 +4,14 @@ public enum CustomResponseStatus{
 
     SUCCESS(0, "success"),
     FAILD(-1, "failed"),
-    ERROR(-2, "error");
+    ERROR(-2, "error"),
+    SESSION_ERROR(-3, "session error"),
+    REGISTRATION_ERROR(-4, "registration error"),
+    OUT_OF_STOCK(-5, "out of stock"),
+    USER_NOT_FOUND(-6, "user not found"),
+    EXISTING_ORDER(-7, "cannot place multiple order"),
+    PLACE_ORDER_ERROR(-8, "place an order error");
+
 
     private int code;
     private String message;
