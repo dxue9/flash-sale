@@ -19,24 +19,12 @@
         // function refreshVerifyCode(){
         //     $("#verifyCodeImg").attr("src", "/sale/verifyCodeRegister");
         // };
-
-        // function checkPhone(phone){
-        //     if(!(/^1[34578]\d{9}$/.test(phone))){
-        //         alert("phone number invalid");
-        //         return false;
-        //     }
-        // }
-
+        
         function register_go() {
             var username =$("#username").val();
             var inputPass = $("#password").val();
             var passwordrepeat = $("#repassword").val();
             // var verifyCode = $("#verifyCode").val();
-            // var check = checkPhone(username);
-            // if(!check){
-            //     alert("phone number invalid");
-            //     return ;
-            // }
             if(inputPass==""||inputPass==null||inputPass == undefined ){
                 alert("password left blank");
                 return ;
@@ -67,7 +55,7 @@
                 },
                 success:function(data){
                     layer.closeAll();
-                    if(data == "success"){
+                    if(data.code == 0){
                         layer.msg("success");
                         window.location.href="/goods/to_list";
                     }else{

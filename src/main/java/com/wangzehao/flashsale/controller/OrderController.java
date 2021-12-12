@@ -4,9 +4,7 @@ import com.wangzehao.flashsale.domain.OrderInfo;
 import com.wangzehao.flashsale.domain.SaleUser;
 import com.wangzehao.flashsale.service.GoodsService;
 import com.wangzehao.flashsale.service.OrderService;
-import com.wangzehao.flashsale.service.UserService;
 import com.wangzehao.flashsale.vo.GoodsVo;
-import com.wangzehao.flashsale.vo.LoginVo;
 import com.wangzehao.flashsale.vo.OrderDetailVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 @Controller
 @RequestMapping("/order")
 public class OrderController extends BaseController {
@@ -28,9 +23,6 @@ public class OrderController extends BaseController {
 
     @Autowired
     private OrderService orderService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private GoodsService goodsService;

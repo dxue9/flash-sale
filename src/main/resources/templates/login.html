@@ -83,7 +83,7 @@
             },
             success:function(data){
                 layer.closeAll();
-                if(data == "success"){
+                if(data.code == 0){
                     layer.msg("success");
                     window.location.href="/goods/to_list";
                 }else{

@@ -1,6 +1,9 @@
 package com.wangzehao.flashsale.controller;
 
+import com.wangzehao.flashsale.common.enums.CustomResponseStatus;
 import com.wangzehao.flashsale.domain.SaleUser;
+import com.wangzehao.flashsale.redis.RedisService;
+import com.wangzehao.flashsale.redis.prefix.GoodsKey;
 import com.wangzehao.flashsale.service.GoodsService;
 import com.wangzehao.flashsale.service.SaleUserService;
 import com.wangzehao.flashsale.service.UserService;
@@ -29,7 +32,7 @@ public class GoodsController extends BaseController{
     private GoodsService goodsService;
 
     @Autowired
-    private SaleUserService saleUserService;
+    private RedisService redisService;
 
     @RequestMapping(value = "/to_list", produces = "text/html")
     @ResponseBody
@@ -59,6 +62,9 @@ public class GoodsController extends BaseController{
         }else { // onging
             status = 1;
             remainSeconds = 0;
+
+            Integer orginalStock = goodsService.getOriginalStockByGoodsId(goodsId);
+            redisService.set(GoodsKey.getGoodsStock, String.valueOf(goodsId), orginalStock);
         }
         GoodsDetailVo vo = new GoodsDetailVo();
         vo.setGoods(goods);
@@ -90,6 +96,8 @@ public class GoodsController extends BaseController{
         }else { // onging
             status = 1;
             remainSeconds = 0;
+            Integer orginalStock = goodsService.getOriginalStockByGoodsId(goodsId);
+            redisService.set(GoodsKey.getGoodsStock, String.valueOf(goodsId), orginalStock);
         }
         model.addAttribute("status", status);
         model.addAttribute("remainSeconds", remainSeconds);

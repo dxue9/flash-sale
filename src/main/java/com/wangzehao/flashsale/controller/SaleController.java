@@ -3,6 +3,7 @@ package com.wangzehao.flashsale.controller;
 import com.wangzehao.flashsale.access.AccessLimit;
 import com.wangzehao.flashsale.common.CustomAbstractResponse;
 import com.wangzehao.flashsale.common.CustomResponse;
+import com.wangzehao.flashsale.common.enums.CustomResponseStatus;
 import com.wangzehao.flashsale.domain.OrderInfo;
 import com.wangzehao.flashsale.domain.SaleOrder;
 import com.wangzehao.flashsale.domain.SaleUser;
@@ -104,42 +105,48 @@ public class SaleController{
     @AccessLimit(needLogin = true)
     @RequestMapping(value="/path")
     @ResponseBody
-    public String getSalePath(HttpServletRequest request, SaleUser user,
+    public CustomResponse<String> getSalePath(HttpServletRequest request, SaleUser user,
                               @RequestParam("goodsId") long goodsId){
+        CustomResponse<String> result = CustomResponse.build();
         if(user == null){
-            return "error";
+            result.withError(CustomResponseStatus.REGISTRATION_ERROR.getCode(), CustomResponseStatus.REGISTRATION_ERROR.getMessage());
+            return result;
         }
 
-        Integer orginalStock = goodsService.getStockByGoodsId(goodsId);
-        redisService.set(GoodsKey.getGoodsStock, user.getNickname(), orginalStock);
-
-        return saleService.createBuyPath(user, goodsId);
+        String path = saleService.createBuyPath(user, goodsId);
+        result.setData(path);
+        return result;
     }
 
     @AccessLimit(needLogin = true)
     @RequestMapping(value = "/{path}/do_sale", method = RequestMethod.POST)
     @ResponseBody
-    public String placeOrder(Model model, SaleUser user, @PathVariable("path") String path,
+    public CustomResponse<String> placeOrder(Model model, SaleUser user, @PathVariable("path") String path,
                              @RequestParam("goodsId") long goodsId){
-        if(user == null)    {
-            return "error";
+        CustomResponse<String> result = CustomResponse.build();
+        if(user == null) {
+            result.withError(CustomResponseStatus.USER_NOT_FOUND.getCode(), CustomResponseStatus.USER_NOT_FOUND.getMessage());
+            return result;
         }
         // check if have existing order
         SaleOrder order = orderService.getSaleOrderByUserIdGoodsId(user.getNickname(), goodsId);
         if (order != null) {
-            return "error";
+            result.withError(CustomResponseStatus.EXISTING_ORDER.getCode(), CustomResponseStatus.EXISTING_ORDER.getMessage());
+            return result;
         }
 
         GoodsVo goodsVo = goodsService.getGoodsVoByGoodsId(goodsId);
         int stock = goodsVo.getStockCount();
         if(stock <= 0) {
-            return "error";
+            result.withError(CustomResponseStatus.OUT_OF_STOCK.getCode(), CustomResponseStatus.OUT_OF_STOCK.getMessage());
+            return result;
         }
         OrderInfo orderInfo = saleService.sale(user, goodsVo);
         if(orderInfo == null) {
-            return "error";
+            result.withError(CustomResponseStatus.PLACE_ORDER_ERROR.getCode(), CustomResponseStatus.PLACE_ORDER_ERROR.getMessage());
+            return result;
         }
-        return "success";
+        return result;
     }
 
     /**
@@ -157,7 +164,7 @@ public class SaleController{
         model.addAttribute("user", user);
         Long saleResult = saleService.getSaleResult(user.getNickname(), goodsId);
         Integer currentStock = goodsService.getStockByGoodsId(goodsId);
-        Integer originalStock = redisService.get(GoodsKey.getGoodsStock, user.getNickname(), Integer.class);
+        Integer originalStock = redisService.get(GoodsKey.getGoodsStock, String.valueOf(goodsId), Integer.class);
         CustomResponse<List<Long>> response = CustomResponse.build();
         ArrayList<Long> stocks = new ArrayList<Long>();
         stocks.add((long)originalStock);

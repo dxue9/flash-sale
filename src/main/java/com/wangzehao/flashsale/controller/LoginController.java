@@ -1,5 +1,6 @@
 package com.wangzehao.flashsale.controller;
 
+import com.wangzehao.flashsale.common.CustomResponse;
 import com.wangzehao.flashsale.service.SaleUserService;
 import com.wangzehao.flashsale.service.UserService;
 import com.wangzehao.flashsale.vo.LoginVo;
@@ -32,11 +33,15 @@ public class LoginController {
 
     @RequestMapping("/do_login")
     @ResponseBody
-    public String doLogin(HttpServletResponse response, @Valid LoginVo loginVo){
+    public CustomResponse<Boolean> doLogin(HttpServletResponse response, @Valid LoginVo loginVo){
         logger.info(loginVo.toString());
+        CustomResponse<Boolean> result = CustomResponse.build();
         if(saleUserService.login(response, loginVo)){
-            return "success";
+            result.setData(true);
         }
-        return "false";
+        else{
+            result.setData(false);
+        }
+        return result;
     }
 }

@@ -103,10 +103,10 @@
                 // verifyCode:$("#verifyCode").val()
             },
             success:function(data){
-                if(data != "error"){
-                    placeOrder(data);
+                if(data.code == 0){
+                    placeOrder(data.data);
                 }else{
-                    layer.msg(data.msg);
+                    layer.msg(data.message);
                 }
             },
             error:function(){
@@ -123,11 +123,11 @@
                 goodsId: goodsId,
             },
             success:function(data){
-                if(data == "success"){
+                if(data.code == 0){
                     //window.location.href="/order_detail.htm?orderId="+data.data.id;
                     getOrderResult();
                 }else{
-                    layer.msg(data.msg);
+                    layer.msg(data.message);
                 }
             },
             error:function(){
@@ -147,16 +147,16 @@
             },
             success:function(data){
                 if(data.code == 0){
-                    layer.confirm("Congratulation! You are the No. " + data.data.get(1) - data.data.get(0) + " to XXX. To check the order detail?", {btn:["Sure","Not now"]},
+                    layer.confirm("Congratulation! You are the No. " + (data.data[0] - data.data[1]).toString() + " to spike this goods. To check the order detail?", {btn:["Sure","Not now"]},
                     function(){
-                        window.location.href="/order_detail.htm?orderId="+data.data.get(2);
+                        window.location.href="/order_detail.htm?orderId="+data.data[2];
                         // window.location.href="/order/to_detail;
                     },
                     function(){
                         layer.closeAll();
                     });
                 }else{
-                    layer.msg(data.msg);
+                    layer.msg(data.message);
                 }
             },
             error:function(){

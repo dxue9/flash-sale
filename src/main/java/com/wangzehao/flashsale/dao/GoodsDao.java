@@ -23,4 +23,7 @@ public interface GoodsDao {
 
     @Select("select sg.stock_count from sale_goods sg where goods_id = #{goodsId}")
     public Integer getStockByGoodsId(@Param("goodsId") long goodsId);
+
+    @Select("select sg.original_stock from sale_goods sg where goods_id = #{goodsId}")
+    public Integer getOriginalStockByGoodsId(@Param("goodsId") long goodsId);
 }
