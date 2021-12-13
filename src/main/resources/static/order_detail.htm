@@ -24,7 +24,7 @@
 <body>
 <div class="panel" >
     <div class="container">
-        <div class="card" style="background: #F8F8F8;border-radius: 20px;height:600px;">
+        <div class="card" style="background: #F8F8F8;border-radius: 20px;height:650px;">
             <h1 style="text-align: center;padding-top:20px;">Order Detail</h1>
             <table class="table" id="goodslist">
                 <tr>
@@ -49,14 +49,23 @@
                 </tr>
                 <tr>
                     <th style="padding-left: 50px;">Recipient Name</th>
-                    <td colspan="2">Alice</td>
+                    <td colspan="2">
+                        <div class="form_text_ipt">
+                        <input id="name" name = "name"  type="text" placeholder="name" required="true"/>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <th style="padding-left: 50px;">Shipping Address</th>
-                    <td colspan="2">6 metroCenter</td>
+                    <td colspan="2">
+                        <div class="form_text_ipt">
+                        <input id="address" name = "address"  type="text" placeholder="address" required="true"/>
+                    </div>
+                    </td>
                 </tr>
             </table>
-            <div style="text-align: center;font-size: 15px;">
+            <button type="button" class="btn btn-primary"  style="display: block;margin:0 auto;">Confirm</button>
+            <div style="text-align: center;font-size: 15px;padding-top: 20px;">
                 <a href="/goods/to_list">Continue shopping</a></div>
         </div>
     </div>
