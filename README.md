@@ -38,9 +38,13 @@ When looking up the detail of a product. If the current time is later than start
 
 
 
-- order detail page![](orderDetail.jpg)
+- order detail page
 
+  ![](orderDetail1.jpg)
 
+  ![](orderDetail.jpg)
+
+If succcesfully placed an order, it will show "you are the No. XXX to spike this product". You can either back to the sale goods page or check the detail of your order.
 
 
 
