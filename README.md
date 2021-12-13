@@ -22,10 +22,10 @@ We also use ThreadLocal to set and get user object, which has per-thread data th
 
 
 - sales goods page
-   ![](saleGoodsList.jpg)
-
+ ![](saleGoodsList.jpg)
+![](OrderList.jpg)
 To show all the goods on sale, we integrate Thymeleaf in Spring Boot. It applies a set of transformations to template files in order to display data or text produced by the application. The first time query of these goods information, we can put them into Redis in order to facilitate the following repeat query like display the detail of each goods.
-
+We have a navbar for this page, the user logout will direct the user to the login page. The orderList link will show user all their orders in the orderListPage.
 
 
 - place order page
@@ -45,7 +45,6 @@ When looking up the detail of a product. If the current time is later than start
   ![](orderDetail.png)
 
 If the good is out of stock, user cannot place the order. There will be alert of "out of stock". In our system, the user cannot place multiple orders.It will show the alert if user have already bought the good. If succcesfully placed an order, it will show "you are the No. XXX to spike this product".Then you can check the detail of your order and enter your name and address. 
-
 
 ## DB Schema
 
