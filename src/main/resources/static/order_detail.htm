@@ -42,9 +42,9 @@
             <td>Order Status</td>
             <td id="orderStatus">
             </td>
-            <td>
-                <button class="btn btn-primary btn-block" type="submit" id="payButton">Pay Now</button>
-            </td>
+<!--            <td>-->
+<!--                <button class="btn btn-primary btn-block" type="submit" id="payButton">Pay Now</button>-->
+<!--            </td>-->
         </tr>
         <tr>
             <td>Recipient Name</td>
@@ -55,10 +55,16 @@
             <td colspan="2">Somewhere</td>
         </tr>
     </table>
+    <button type="button" class="btn btn-secondary" id="mainPageButton" onclick="backToMainPage()"> Back to Main Page</button>
 </div>
 </body>
 </html>
 <script>
+
+    function backToMainPage(){
+        window.location.href="/goods/to_list";
+    }
+
     function render(detail){
         var goods = detail.goods;
         var order = detail.order;

@@ -78,12 +78,13 @@
                     <div class="form-inline">
                         <!--                        <img id="verifyCodeImg" width="80" height="32"  style="display:none" onclick="refreshVerifyCode()"/>-->
                         <!--                        <input id="verifyCode"  class="form-control" style="display:none"/>-->
-                        <button class="btn btn-primary" type="button" id="buyButton"onclick="getSalePath()">Buy</button>
+                        <button class="btn btn-primary" type="button" id="buyButton" onclick="getSalePath()">Buy</button>
                     </div>
                 </div>
             </td>
         </tr>
     </table>
+    <button type="button" class="btn btn-secondary" id="mainPageButton" onclick="backToMainPage()"> Back to Main Page</button>
 </div>
     </div>
 </div>
@@ -91,6 +92,11 @@
 </body>
 <script>
     var goodsId = [[${goods.id}]];
+
+    function backToMainPage(){
+        window.location.href="/goods/to_list";
+    }
+
 
     function getSalePath(){
         // console.log(goodsId);
