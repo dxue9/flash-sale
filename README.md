@@ -38,9 +38,9 @@ When looking up the detail of a product. If the current time is later than start
 
 
 
-- order detail page
+- order detail page![](orderDetail.jpg)
 
-  
+
 
 
 
