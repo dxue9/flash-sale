@@ -26,4 +26,7 @@ public interface GoodsDao {
 
     @Select("select sg.original_stock from sale_goods sg where goods_id = #{goodsId}")
     public Integer getOriginalStockByGoodsId(@Param("goodsId") long goodsId);
+
+    @Select("update sale_goods set original_stock = #{count}  where goods_id = #{goodsId}")
+    public Boolean setOriginalStockByGoodsId(@Param("goodsId") long goodsId, @Param("count") int count);
 }

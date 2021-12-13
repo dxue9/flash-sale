@@ -179,6 +179,12 @@
     function countDown(){
         var remainSeconds = $("#remainSeconds").val();
         var timeout;
+        var status = [[${status}]];
+        console.log(status);
+        if(status == -1){
+            $("#buyButton").attr("disabled", true);
+            $("#Tip").html("Out of Stock");
+        }
         if(remainSeconds > 0){
             $("#buyButton").attr("disabled", true);
             timeout = setTimeout(function(){

@@ -53,18 +53,25 @@ public class GoodsController extends BaseController{
         long now = System.currentTimeMillis();
         int status = 0;
         int remainSeconds = 0;
-        if(now < startAt ) { // not begin
-            status = 0;
-            remainSeconds = (int)((startAt - now )/1000);
-        }else  if(now > endAt){ // end
-            status = 2;
-            remainSeconds = -1;
-        }else { // onging
-            status = 1;
-            remainSeconds = 0;
 
-            Integer orginalStock = goodsService.getOriginalStockByGoodsId(goodsId);
-            redisService.set(GoodsKey.getGoodsStock, String.valueOf(goodsId), orginalStock);
+        Integer orginalStock = goodsService.getOriginalStockByGoodsId(goodsId);
+        if(orginalStock <= 0){
+            status = -1;
+            remainSeconds = -1;
+        }
+        else {
+            if (now < startAt) { // not begin
+                status = 0;
+                remainSeconds = (int) ((startAt - now) / 1000);
+            } else if (now > endAt) { // end
+                status = 2;
+                remainSeconds = -1;
+            } else { // onging
+                status = 1;
+                remainSeconds = 0;
+
+                redisService.set(GoodsKey.getGoodsStock, String.valueOf(goodsId), orginalStock);
+            }
         }
         GoodsDetailVo vo = new GoodsDetailVo();
         vo.setGoods(goods);
@@ -87,17 +94,24 @@ public class GoodsController extends BaseController{
         long now = System.currentTimeMillis();
         int status = 0;
         int remainSeconds = 0;
-        if(now < startAt ) { // not begin
-            status = 0;
-            remainSeconds = (int)((startAt - now )/1000);
-        }else  if(now > endAt){ // end
-            status = 2;
+
+        Integer orginalStock = goodsService.getOriginalStockByGoodsId(goodsId);
+        if(orginalStock <= 0){
+            status = -1;
             remainSeconds = -1;
-        }else { // onging
-            status = 1;
-            remainSeconds = 0;
-            Integer orginalStock = goodsService.getOriginalStockByGoodsId(goodsId);
-            redisService.set(GoodsKey.getGoodsStock, String.valueOf(goodsId), orginalStock);
+        }
+        else {
+            if (now < startAt) { // not begin
+                status = 0;
+                remainSeconds = (int) ((startAt - now) / 1000);
+            } else if (now > endAt) { // end
+                status = 2;
+                remainSeconds = -1;
+            } else { // onging
+                status = 1;
+                remainSeconds = 0;
+                redisService.set(GoodsKey.getGoodsStock, String.valueOf(goodsId), orginalStock);
+            }
         }
         model.addAttribute("status", status);
         model.addAttribute("remainSeconds", remainSeconds);

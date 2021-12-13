@@ -138,6 +138,7 @@ public class SaleController{
         GoodsVo goodsVo = goodsService.getGoodsVoByGoodsId(goodsId);
         int stock = goodsVo.getStockCount();
         if(stock <= 0) {
+            goodsService.setOriginalStockByGoodsId(goodsId, 0);
             result.withError(CustomResponseStatus.OUT_OF_STOCK.getCode(), CustomResponseStatus.OUT_OF_STOCK.getMessage());
             return result;
         }
