@@ -44,7 +44,7 @@ When looking up the detail of a product. If the current time is later than start
   ![](orderDetail1.jpg)
   ![](orderDetail.png)
 
-If the good is out of stock, user cannot place the order. There will be alert of "out of stock". In our system, the user cannot place multiple orders.It will show the alert if user have already bought the good. If succcesfully placed an order, it will show "you are the No. XXX to spike this product". You can either back to the sale goods page or check the detail of your order. 
+If the good is out of stock, user cannot place the order. There will be alert of "out of stock". In our system, the user cannot place multiple orders.It will show the alert if user have already bought the good. If succcesfully placed an order, it will show "you are the No. XXX to spike this product".Then you can check the detail of your order and enter your name and address. 
 
 
 ## DB Schema
