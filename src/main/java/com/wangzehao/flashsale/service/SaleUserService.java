@@ -123,7 +123,7 @@ public class SaleUserService {
             return false;
         }
         String token = StringUtils.isEmpty(paramToken)?cookieToken:paramToken;
-        redisService.set(SaleUserKey.token, token, null);
+        redisService.delete(SaleUserKey.token, token);
         Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, null);
         cookie.setPath("/");
         cookie.setHttpOnly(true);
