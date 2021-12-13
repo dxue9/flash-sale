@@ -34,7 +34,7 @@ To show all the goods on sale, we integrate Thymeleaf in Spring Boot. It applies
    ![](saleGoodsDetail2.jpg)
    ![](saleGoodsDetail.jpg)
 
-When looking up the detail of a product. If the current time is later than start time of the sale, there will be a timer that counts down the remaining seconds. When the sale begins, user can click the Buy button to place an order. When the sale ends, buy button will be disabled.
+When looking up the detail of a product. If the current time is later than start time of the sale, there will be a timer that counts down the remaining seconds. When the sale begins, user can click the Buy button to place an order. When the sale ends or stock count is 0, buy button will be disabled.
 
 
 
