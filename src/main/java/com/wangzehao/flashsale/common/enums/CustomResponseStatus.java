@@ -10,7 +10,8 @@ public enum CustomResponseStatus{
     OUT_OF_STOCK(-5, "out of stock"),
     USER_NOT_FOUND(-6, "user not found"),
     EXISTING_ORDER(-7, "cannot place multiple order"),
-    PLACE_ORDER_ERROR(-8, "place an order error");
+    PLACE_ORDER_ERROR(-8, "place an order error"),
+    AUTH_ERROR(-9, "user authentication failed");
 
 
     private int code;

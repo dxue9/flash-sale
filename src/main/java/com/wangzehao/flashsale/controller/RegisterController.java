@@ -55,6 +55,8 @@ public class RegisterController {
         else if(!saleUserService.logout(response, request)){
             result.withError(CustomResponseStatus.ERROR);
         }
+        response.setHeader("Location", "/login/to_login");
+        response.setStatus(302);
         return result;
     }
 }

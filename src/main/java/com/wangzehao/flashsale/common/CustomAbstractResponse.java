@@ -25,16 +25,19 @@ public class CustomAbstractResponse {
 
     public CustomAbstractResponse withError(CustomResponseStatus status) {
         this.status = status;
+        this.code = status.getCode();
         return this;
     }
 
     public CustomAbstractResponse withError(String message) {
         this.status = CustomResponseStatus.ERROR;
+        this.code = CustomResponseStatus.ERROR.getCode();
         this.message = message;
         return this;
     }
 
     public CustomAbstractResponse withError(int code, String message) {
+        this.status = CustomResponseStatus.ERROR;
         this.code = code;
         this.message = message;
         return this;

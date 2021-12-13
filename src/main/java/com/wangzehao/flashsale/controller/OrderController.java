@@ -60,6 +60,9 @@ public class OrderController extends BaseController {
     @RequestMapping(value = "/to_list", produces = "text/html")
     @ResponseBody
     public String list(HttpServletRequest request, HttpServletResponse response, Model model, SaleUser user){
+        if(user == null){
+            return "User has not logged in.";
+        }
         model.addAttribute("user", user);
         List<OrderInfo> orderList = orderService.getOrderListByUserId(user.getNickname());
         model.addAttribute("orderList", orderList);

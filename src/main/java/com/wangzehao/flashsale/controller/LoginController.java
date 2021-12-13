@@ -1,6 +1,7 @@
 package com.wangzehao.flashsale.controller;
 
 import com.wangzehao.flashsale.common.CustomResponse;
+import com.wangzehao.flashsale.common.enums.CustomResponseStatus;
 import com.wangzehao.flashsale.service.SaleUserService;
 import com.wangzehao.flashsale.service.UserService;
 import com.wangzehao.flashsale.vo.LoginVo;
@@ -40,7 +41,7 @@ public class LoginController {
             result.setData(true);
         }
         else{
-            result.setData(false);
+            result.withError(CustomResponseStatus.AUTH_ERROR);
         }
         return result;
     }
