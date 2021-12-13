@@ -42,7 +42,7 @@ When looking up the detail of a product. If the current time is later than start
   ![](orderDetail3.jpg)
   ![](orderDetail2.jpg)
   ![](orderDetail1.jpg)
-  ![](orderDetail.jpg)
+  ![](orderDetail.png)
 
 In our system, the user cannot place multiple orders.It will show the alert if user have already bought the good. If succcesfully placed an order, it will show "you are the No. XXX to spike this product". You can either back to the sale goods page or check the detail of your order. 
 
