@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
@@ -103,6 +104,31 @@ public class SaleUserService {
             logger.error("Register Failed", e);
             return false;
         }
+        return true;
+    }
+
+    public boolean logout(HttpServletResponse response, HttpServletRequest request){
+
+        String paramToken = request.getParameter(SaleUserService.COOKIE_NAME_TOKEN);
+        String cookieToken = null;
+        Cookie[]  cookies = request.getCookies();
+        if(cookies != null || cookies.length > 0){
+            for(Cookie cookie : cookies) {
+                if (cookie.getName().equals(SaleUserService.COOKIE_NAME_TOKEN)) {
+                    cookieToken = cookie.getValue();
+                }
+            }
+        }
+        if(StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
+            return false;
+        }
+        String token = StringUtils.isEmpty(paramToken)?cookieToken:paramToken;
+        redisService.set(SaleUserKey.token, token, null);
+        Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, null);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
         return true;
     }
 
