@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<link rel="stylesheet" th:href="@{/css/common.css}" />
+<head>
+    <title>Order List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- jquery-validator -->
+    <script type="text/javascript" th:src="@{/jquery-validation/jquery.validate.min.js}"></script>
+    <script type="text/javascript" th:src="@{/jquery-validation/localization/messages_zh.min.js}"></script>
+    <!-- layer -->
+    <script type="text/javascript" th:src="@{/layer/layer.js}"></script>
+    <!-- md5.js -->
+    <script type="text/javascript" th:src="@{/js/md5.min.js}"></script>
+    <!-- common.js -->
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
+</head>
+
+<body>
+<div class="warp login_wrap">
+<h1 style="font-size:50px;color:blue;text-align: center;margin-top: 0;padding-top: 40px;">Order Lists</h1>
+<div  style="display: flex">
+    <div th:each="order: ${orderList}" >
+        <div class="card-deck">
+        <div class="card" style="background: #FFFFFF;width:240px;height:400px;border-radius: 10px;margin:100px 120px;padding:20px;">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${order.goodsName}" style="font-size:20px;font-weight: bold;"></h5>
+                <p class="card-text">Paid Price: <span th:text="${order.goodsPrice}" style="color: blue"></span></p>
+                <p class="card-text">Order Status:
+                    <span th:if="${order.status eq 0}" style="color: red">unpaid</span>
+                    <span th:if="${order.status eq 1}">upshipped</span>
+                </p>
+                <p class="card-text">Create Date <span th:text="${order.createDate}" style="color: red"></span></p>
+            </div>
+                <a th:href="'/order_detail.htm?orderId=' + ${order.id}" class="btn btn-success" style="display: block;margin: 0 auto;">Detail</a>
+        </div>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

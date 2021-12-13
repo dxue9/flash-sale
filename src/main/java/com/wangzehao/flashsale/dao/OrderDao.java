@@ -2,6 +2,7 @@ package com.wangzehao.flashsale.dao;
 
 import com.wangzehao.flashsale.domain.OrderInfo;
 import com.wangzehao.flashsale.domain.SaleOrder;
+import com.wangzehao.flashsale.vo.OrderDetailVo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -28,4 +29,7 @@ public interface OrderDao {
 
     @Select("update order_info set status=0 where id=#{id}")
     public int closeOrderByOrderInfo(@Param("id") long id);
+
+    @Select("select * from order_info where user_id=#{nickname}")
+    public  List<OrderInfo> selectOrderByUserId(@Param("nickname") String nickname);
 }

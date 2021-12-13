@@ -49,4 +49,8 @@ public class OrderService {
         orderDao.insertSaleOrder(saleOrder);
         return orderInfo;
     }
+
+    public List<OrderInfo> getOrderListByUserId(String nickname){
+        return orderDao.selectOrderByUserId(nickname);
+    }
 }
