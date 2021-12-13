@@ -197,3 +197,6 @@ header{
 	bottom: 0;
 	margin: auto;
 }
+.layui-layer-btn a {
+	border-radius: 2px;
+}
