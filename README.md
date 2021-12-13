@@ -11,7 +11,7 @@ A online shopping web application based on Spring Boot, Redis, MySQL with native
      ![](register.jpg)
      ![](userLogin.jpg)
 
-When user do login or register, a random salt will be added to the password and then use MD5 (a cryptographic hash algorithm) to get a fixed length string value sended to the server.
+When user do login or register, a random salt will be added to the password and then use MD5 (a cryptographic hash algorithm) to get a fixed length string value sent to the server.
 
 After authentication on the server side, the server will generate a random UUID as token and add it to the cookie. Also, we set the token value as key and user object as value in the Redis to maintain a session between client and server.
 
@@ -31,10 +31,10 @@ To show all the goods on sale, we integrate Thymeleaf in Spring Boot. It applies
 - place order page
 
    ![](saleGoodsDetail1.jpg)
-
+   ![](saleGoodsDetail2.jpg)
    ![](saleGoodsDetail.jpg)
 
-When looking up the detail of a product. If the current time is later than start time of the sale, there will be a timer that counts down the remaining seconds. When the sale begins, user can click the Buy button to place an order. 
+When looking up the detail of a product. If the current time is later than start time of the sale, there will be a timer that counts down the remaining seconds. When the sale begins, user can click the Buy button to place an order. When the sale ends, buy button will be disabled.
 
 
 
